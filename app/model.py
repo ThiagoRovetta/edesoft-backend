@@ -10,6 +10,14 @@ def write_to_db(file_content: str):
     try:
         conn, cursor = get_db_connection()
 
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS dados (
+                cpf character varying(20) NOT NULL,
+                cnpj character varying(20) NOT NULL,
+                data date NOT NULL
+            );
+        ''')
+
         query = 'INSERT INTO dados(cpf, cnpj, data) VALUES '
 
         query_values = []
